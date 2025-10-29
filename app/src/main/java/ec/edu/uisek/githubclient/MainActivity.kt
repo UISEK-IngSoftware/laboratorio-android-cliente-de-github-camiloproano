@@ -31,32 +31,26 @@ class MainActivity : AppCompatActivity() {
         binding.reposRecyclerView.adapter = reposAdapter
     }
 
-    private fun fetchRepositories(){
+    private fun fetchRepositories() {
         val apiService: GithubApiService = RetrofitClient.githubApiService
         val call = apiService.getRepos()
 
         call.enqueue(object: Callback<List<Repo>> {
             override fun onResponse(call: Call<List<Repo>?>, response: Response<List<Repo>?>) {
-                if(response.isSuccessful){
+                if(response.isSuccessful) {
                     val repos = response.body()
-                    if (response != null && repos.isNotEmpty()) {
+                    if (repos != null && repos.isNotEmpty()) {
                         reposAdapter.updateRepositories(repos)
                     } else {
                         showMessage("No se encontraron repositorios")
                     }
                 } else {
-                    val errorMessage = when(response.code()) {
-                        401 -> "No autorizado"
-                        403 -> "Prohibido"
-                        404 -> "No encontrado"
-                        else -> "Error ${response.code()}"
-                    }
-                    showMessage("Error: $errorMessage")
+                    showMessage("Error al cargar los repositorios")
                 }
             }
 
             override fun onFailure(call: Call<List<Repo>?>, t: Throwable) {
-                showMessage("No se pudieron cargar los repositorios")
+                showMessage("No se pudieron cargar los repositorio")
             }
         })
     }
