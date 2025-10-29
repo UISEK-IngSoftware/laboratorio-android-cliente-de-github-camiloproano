@@ -24,6 +24,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         setupRecyclerView()
+        fetchRepositories()
     }
 
     private fun setupRecyclerView() {
