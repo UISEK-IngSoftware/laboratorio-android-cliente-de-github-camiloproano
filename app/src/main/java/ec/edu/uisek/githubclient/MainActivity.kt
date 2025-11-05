@@ -1,5 +1,6 @@
 package ec.edu.uisek.githubclient
 
+import android.content.Intent
 import android.os.Bundle
 import android.security.advancedprotection.AdvancedProtectionManager
 import android.view.textclassifier.ConversationActions
@@ -12,6 +13,7 @@ import ec.edu.uisek.githubclient.services.RetrofitClient
 import retrofit2.Response
 import retrofit2.Call
 import retrofit2.Callback
+import kotlin.math.log
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
@@ -24,6 +26,14 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         setupRecyclerView()
+
+        binding.newRepoFab.setOnClickListener {
+            displayNewRepoForm()
+        }
+    }
+
+    override fun onResume() {
+        super.onResume()
         fetchRepositories()
     }
 
@@ -46,7 +56,13 @@ class MainActivity : AppCompatActivity() {
                         showMessage("No se encontraron repositorios")
                     }
                 } else {
-                    showMessage("Error al cargar los repositorios")
+                    val errorMessage = when(response.code()) {
+                        401 -> "No autorizado"
+                        402 -> "Prohibido"
+                        404 -> "No encontrado"
+                        else -> "Error ${response.code()}"
+                    }
+                    showMessage("Error: $errorMessage")
                 }
             }
 
@@ -58,5 +74,11 @@ class MainActivity : AppCompatActivity() {
 
     private fun showMessage (message: String) {
         Toast.makeText(this, message, Toast.LENGTH_LONG).show()
+    }
+
+    private fun displayNewRepoForm() {
+        Intent(this, RepoForm::class.java).apply {
+            startActivity(this)
+        }
     }
 }
