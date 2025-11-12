@@ -7,6 +7,9 @@ import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.POST
 import retrofit2.http.Query
+import retrofit2.http.PATCH
+import retrofit2.http.DELETE
+import retrofit2.http.Path
 
 interface GithubApiService {
 
@@ -20,5 +23,18 @@ interface GithubApiService {
     fun addRepo(
         @Body repoRequest: RepoRequest
     ) : Call<Repo>
+
+    @PATCH("repos/{owner}/{repo}")
+    fun updateRepo(
+        @Path("owner") owner: String,
+        @Path("repo") repo: String,
+        @Body body: Map<String, String>
+    ): Call<Repo>
+
+    @DELETE("repos/{owner}/{repo}")
+    fun deleteRepo(
+        @Path("owner") owner: String,
+        @Path("repo") repo: String
+    ): Call<Void>
 
 }
