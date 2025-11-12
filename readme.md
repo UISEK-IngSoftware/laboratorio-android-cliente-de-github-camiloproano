@@ -3,6 +3,7 @@
 ## Datos del estudiante
 **Nombre:** Camilo Proaño
 **Carrera:** Ingeniería en Informática
+**Nota:** En GitHub aparece otro usuario que hizo los cambios, pero esto se debe a que cambié de computadora en el laboratorio, ningún compañero extra estuvo involucrado ni en los laboratorios ni en el desarrollo del examen del parcial.
 
 ## Descripción del Proyecto
 Este proyecto es un ejercicio de laboratorio para estudiantes donde se implementará una aplicación Android que simula un cliente de GitHub. La aplicación se centrará en la implementación de interfaces y layouts, sin integración con la API REST de GitHub en esta fase.
