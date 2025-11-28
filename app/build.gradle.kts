@@ -15,7 +15,7 @@ android {
         versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
-
+/*
         val envFile = rootProject.file(".env")
         val githubToken = if (envFile.exists()) {
             envFile.readLines()
@@ -26,8 +26,8 @@ android {
         } else {
             ""
         }
-
         buildConfigField("String", "GITHUB_API_TOKEN", "\"$githubToken\"")
+ */
     }
 
     buildTypes {
@@ -69,4 +69,5 @@ dependencies {
     implementation("com.squareup.okhttp3:logging-interceptor:4.12.0")
     implementation("com.github.bumptech.glide:glide:4.16.0")
     implementation("com.google.android.material:material:1.12.0")
+    implementation("androidx.security:security-crypto:1.1.0-alpha06")
 }

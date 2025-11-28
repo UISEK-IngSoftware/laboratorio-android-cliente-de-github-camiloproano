@@ -9,4 +9,8 @@
     <string name="save">Guardar</string>
     <string name="edit_repo">Editar repositorio</string>
     <string name="delete_repo">Eliminar repositorio</string>
+
+    <string name="user">Usuario</string>
+    <string name="password">Contraseña</string>
+    <string name="login">Ingresar</string>
 </resources>

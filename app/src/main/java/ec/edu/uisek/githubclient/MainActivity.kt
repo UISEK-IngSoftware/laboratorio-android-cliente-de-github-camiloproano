@@ -82,7 +82,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun updateRepository(repo: Repo, newName: String, newDescription: String) {
-        val apiService = RetrofitClient.githubApiService
+        val apiService = RetrofitClient.getApiService()
         val body = mapOf(
             "name" to newName,
             "description" to newDescription
@@ -107,7 +107,7 @@ class MainActivity : AppCompatActivity() {
 
 
     private fun deleteRepository(repo: Repo) {
-        val apiService = RetrofitClient.githubApiService
+        val apiService = RetrofitClient.getApiService()
         val call = apiService.deleteRepo(repo.owner.login, repo.name)
 
         call.enqueue(object : Callback<Void> {
@@ -128,7 +128,7 @@ class MainActivity : AppCompatActivity() {
 
 
     private fun fetchRepositories() {
-        val apiService: GithubApiService = RetrofitClient.githubApiService
+        val apiService: GithubApiService = RetrofitClient.getApiService()
         val call = apiService.getRepos()
 
         call.enqueue(object: Callback<List<Repo>> {
