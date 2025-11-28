@@ -30,6 +30,10 @@ class MainActivity : AppCompatActivity() {
         binding.newRepoFab.setOnClickListener {
             displayNewRepoForm()
         }
+
+        binding.btnLogout.setOnClickListener {
+            logoutUser()
+        }
     }
 
     override fun onResume() {
@@ -166,4 +170,18 @@ class MainActivity : AppCompatActivity() {
             startActivity(this)
         }
     }
+
+    private fun logoutUser() {
+        val sessionManager = ec.edu.uisek.githubclient.services.SessionManager(this)
+        sessionManager.clearCredentials()
+
+        // Destruir cliente autenticado para evitar reuso de credenciales
+        ec.edu.uisek.githubclient.services.RetrofitClient.clearClient()
+
+        val intent = Intent(this, LoginActivity::class.java)
+        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+        startActivity(intent)
+        finish()
+    }
+
 }

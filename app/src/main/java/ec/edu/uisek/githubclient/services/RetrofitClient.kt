@@ -1,23 +1,18 @@
 package ec.edu.uisek.githubclient.services
 
-import android.util.Log
-import ec.edu.uisek.githubclient.BuildConfig
 import ec.edu.uisek.githubclient.interceptors.BasicAuthInterceptor
-import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
-/**
- * Objeto singleton que configura y proporciona la instancia de Retrofit
- * para conectarse a la API de GitHub
- */
 object RetrofitClient {
+
     private const val BASE_URL = "https://api.github.com/"
     private var apiService: GithubApiService? = null
 
     fun createAuthentizatedClient(username: String, password: String): GithubApiService {
+
         val loggingInterceptor = HttpLoggingInterceptor().apply {
             level = HttpLoggingInterceptor.Level.BODY
         }
@@ -39,5 +34,9 @@ object RetrofitClient {
 
     fun getApiService(): GithubApiService {
         return apiService ?: throw IllegalStateException("El cliente retrofit no pudo inicializarse")
+    }
+
+    fun clearClient() {
+        apiService = null
     }
 }
